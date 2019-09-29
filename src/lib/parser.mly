@@ -3,8 +3,9 @@
 %token <bool>          LOGIC
 %token <int>           INTEGER
 %token <string>        STRING
-%token <Symbol.symbol> REAL
+%token <float>         REAL
 %token <Symbol.symbol> ID
+%token <Symbol.symbol> COMMENT
 %token                 IF THEN ELSE
 %token                 WHILE DO BREAK
 %token                 LET IN END

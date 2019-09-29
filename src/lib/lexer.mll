@@ -26,15 +26,15 @@
   let str_incr_linenum str lexbuf =
     String.iter (function '\n' -> L.new_line lexbuf | _ -> ()) str
 }
-
+let speciais = "á"|"à"|"â"|"ã"|"é"|"è"|"ê"|"í"|"ï"|"ó"|"ô"|"õ"|"ö"|"ú"|"ç"|"ñ" 
 let spaces = [' ' '\t'] +
 let digit = ['0'-'9']
 let litint = digit +
 let alpha = ['a'-'z' 'A'-'Z']
 let id = alpha+ (alpha | digit | '_')*
-let real = digit+('.')digit+
-
-
+let real = ((digit*('.')digit+ | digit+('.')digit*)(('e'|'E')('-')?(digit+))?)
+(* comentário de uma linha ou bloco *)
+let comment = ('{''#')(alpha |speciais | spaces | '\n'| digit)*('#''}') | ('#')(alpha |speciais | spaces | digit)*('\n')
 
 (* conjunto de regras para reconhecer os tokens *)
 rule token = parse
@@ -55,8 +55,11 @@ rule token = parse
   | "in"          { IN }
   | "end"         { END }
   | "var"         { VAR }
+  | real as lxm     { REAL (float_of_string lxm) }
+  
+  (* por enquanto consideramos o comentário como um token *)
+  | comment as lxm  { COMMENT (Symbol.symbol lxm) }
   | id as lxm     { ID (Symbol.symbol lxm) }
-  | real as lxm     { REAL (Symbol.symbol lxm) }
   | '('       { LPAREN }
   | ')'       { RPAREN }
   | ':'       { COLON }
@@ -89,7 +92,7 @@ and string pos = parse
                          string pos lexbuf }
 
 | "\\n"                { Buffer.add_char string_buffer '\n'; string pos lexbuf }
-| "\\\""               { Buffer.add_char string_buffer '\"'; string pos lexbuf }
+| "\\\"|"               { Buffer.add_char string_buffer '\"'; string pos lexbuf }
 | "\\\\"               { Buffer.add_char string_buffer '\\'; string pos lexbuf }
 
 

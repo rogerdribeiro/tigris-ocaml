@@ -1,9 +1,12 @@
+{# programa para cálculo do fatorial de um
+número inteiro #}
+
+# comentário de uma linha
 let
-        var n: int := 71
-        var f: int := 1,1
+        var n: int := 7
+        var f: int := 1
 in
         while n > 0 do
-                if then else
                 ( f := f * n;
                 n := n - 1;
                 );
