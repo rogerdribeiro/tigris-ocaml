@@ -1,0 +1,47 @@
+digraph AST {
+node [shape=record];
+n [label="LetExp"];
+n_1 [label="Decls"];
+n_1_1 [label="VarDec"];
+n_1_1_1 [label="x"];
+n_1_1 -> n_1_1_1 [arrowhead=none];
+n_1_1_2 [label="int"];
+n_1_1 -> n_1_1_2 [arrowhead=none];
+n_1_1_3 [label="IntExp 32"];
+n_1_1 -> n_1_1_3 [arrowhead=none];
+n_1 -> n_1_1 [arrowhead=none];
+n_1_2 [label="VarDec"];
+n_1_2_1 [label="y"];
+n_1_2 -> n_1_2_1 [arrowhead=none];
+n_1_2_2 [label="int"];
+n_1_2 -> n_1_2_2 [arrowhead=none];
+n_1_2_3 [label="OpExp -"];
+n_1_2_3_1 [label="IntExp 0"];
+n_1_2_3 -> n_1_2_3_1 [arrowhead=none];
+n_1_2_3_2 [label="IntExp 512"];
+n_1_2_3 -> n_1_2_3_2 [arrowhead=none];
+n_1_2 -> n_1_2_3 [arrowhead=none];
+n_1 -> n_1_2 [arrowhead=none];
+n -> n_1 [arrowhead=none];
+n_2 [label="CallExp"];
+n_2_1 [label="printint"];
+n_2 -> n_2_1 [arrowhead=none];
+n_2_2 [label="Args"];
+n_2_2_1 [label="OpExp +"];
+n_2_2_1_1 [label="OpExp *"];
+n_2_2_1_1_1 [label="IntExp 2"];
+n_2_2_1_1 -> n_2_2_1_1_1 [arrowhead=none];
+n_2_2_1_1_2 [label="VarExp"];
+n_2_2_1_1_2_1 [label="SimpleVar x"];
+n_2_2_1_1_2 -> n_2_2_1_1_2_1 [arrowhead=none];
+n_2_2_1_1 -> n_2_2_1_1_2 [arrowhead=none];
+n_2_2_1 -> n_2_2_1_1 [arrowhead=none];
+n_2_2_1_2 [label="VarExp"];
+n_2_2_1_2_1 [label="SimpleVar y"];
+n_2_2_1_2 -> n_2_2_1_2_1 [arrowhead=none];
+n_2_2_1 -> n_2_2_1_2 [arrowhead=none];
+n_2_2 -> n_2_2_1 [arrowhead=none];
+n_2 -> n_2_2 [arrowhead=none];
+n -> n_2 [arrowhead=none];
+
+}
